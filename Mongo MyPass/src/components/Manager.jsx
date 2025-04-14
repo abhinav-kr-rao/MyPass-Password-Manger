@@ -12,7 +12,8 @@ const Manager = () => {
     const [allPass, setAllPass] = useState([]);
 
     const getData = async () => {
-        let req = await fetch("http://localhost:3000")
+        // get data from url
+        let req = await fetch("http://localhost:5173")
         let data = await req.json();
         setAllPass(data)
     }
@@ -49,7 +50,7 @@ const Manager = () => {
         if (i1.length != 0 && i2.length != 0 && i3.length != 0) {
 
             // deleting old entry
-            await fetch("http://localhost:3000", {
+            await fetch("http://localhost:5173", {
                 method: "DELETE", headers: {
                     "Content-Type": "application/json",
                 }, body: JSON.stringify({ id: form.id })
@@ -57,7 +58,7 @@ const Manager = () => {
             const newpass = { ...form, id: uuidv4() }
             setAllPass([...allPass, newpass])
             // adding with new entry
-            await fetch("http://localhost:3000", {
+            await fetch("http://localhost:5173", {
                 method: "POST", headers: {
                     "Content-Type": "application/json",
                 }, body: JSON.stringify(newpass)
@@ -144,8 +145,8 @@ const Manager = () => {
 
                     {allPass.length === 0 && <div className=' text-red-600 text-2xl font-bold'>No passwords</div>}
                     {allPass.length != 0 &&
-                        <table className="table-auto w-full bg-blue-100">
-                            <thead className=''>
+                        <table className="table-auto w-full bg-blue-100 rounded-lg">
+                            <thead className=' '>
                                 <tr className=' bg-blue-700 text-white'>
                                     <th>Website</th>
                                     <th>Username</th>
@@ -153,7 +154,7 @@ const Manager = () => {
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody className=''>
 
                                 {allPass.map((val, i) => {
 

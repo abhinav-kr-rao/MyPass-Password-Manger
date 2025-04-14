@@ -1,16 +1,16 @@
-const express = require("express");
-const { MongoClient } = require("mongodb");
-const dotenv = require("dotenv");
-const bodyParser = require("body-parser");
-const cors = require("cors");
+import express from "express";
+import { MongoClient } from "mongodb";
+import { config } from "dotenv";
+import { json } from "body-parser";
+import cors from "cors";
 
 const app = express();
 const port = 3000;
 
-app.use(bodyParser.json());
+app.use(json());
 app.use(cors());
 
-dotenv.config();
+config();
 // console.log("hello dotenv");
 // console.log(process.env); // remove this after you've confirmed it is working
 
